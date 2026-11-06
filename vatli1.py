@@ -1,7 +1,11 @@
 import math
+import sympy as sp
+import matplotlib.pyplot as plt
+
 def tinh_luc_he_dien_tich(danh_sach_dien_tich):
     n = len(danh_sach_dien_tich)
-    k_so = 9e9  # Hằng số Coulomb (N.m^2/C^2)
+    k_sym = sp.Symbol('k')
+    k_val = 9e9
     ket_qua = {}
     
     for i in range(n):
@@ -9,12 +13,8 @@ def tinh_luc_he_dien_tich(danh_sach_dien_tich):
         x_i = danh_sach_dien_tich[i]['x']
         y_i = danh_sach_dien_tich[i]['y']
         
-        Fx_so = 0.0
-        Fy_so = 0.0
-        
-        # Tạo chuỗi biểu thức tượng trưng (giống phong cách sympy thu gọn)
-        Fx_bieu_thuc_parts = []
-        Fy_bieu_thuc_parts = []
+        Fx_expr, Fy_expr = 0, 0
+        Fx_val, Fy_val = 0.0, 0.0
         
         for j in range(n):
             if i == j:
@@ -23,71 +23,103 @@ def tinh_luc_he_dien_tich(danh_sach_dien_tich):
             x_j = danh_sach_dien_tich[j]['x']
             y_j = danh_sach_dien_tich[j]['y']
             
-            # Khoảng cách và bình phương khoảng cách
             dx = x_i - x_j
             dy = y_i - y_j
             r2 = dx**2 + dy**2
-            r3 = r2 * math.sqrt(r2) if r2 > 0 else 0
             
-            # Thành phần lực theo phương x và y
-            if r3 != 0:
-                f_x = k_so * (q_i * q_j * dx) / r3
-                f_y = k_so * (q_i * q_j * dy) / r3
+            if r2 > 0:
+                r = math.sqrt(r2)
+                r3 = r2 * r
                 
-                Fx_so += f_x
-                Fy_so += f_y
+                # Giá trị số
+                f_x = k_val * (q_i * q_j * dx) / r3
+                f_y = k_val * (q_i * q_j * dy) / r3
+                Fx_val += f_x
+                Fy_val += f_y
                 
-                # Lưu chuỗi biểu thức minh họa
-                Fx_bieu_thuc_parts.append(f"k*({q_i}*{q_j}*({dx}))/({r2})^(3/2)")
-                Fy_bieu_thuc_parts.append(f"k*({q_i}*{q_j}*({dy}))/({r2})^(3/2)")
+                # Biểu thức SymPy
+                Fx_expr += k_sym * (q_i * q_j * dx) / (r2 ** sp.Rational(3, 2))
+                Fy_expr += k_sym * (q_i * q_j * dy) / (r2 ** sp.Rational(3, 2))
         
-        Fx_str = " + ".join(Fx_bieu_thuc_parts) if Fx_bieu_thuc_parts else "0"
-        Fy_str = " + ".join(Fy_bieu_thuc_parts) if Fy_bieu_thuc_parts else "0"
-        
+        F_total = math.hypot(Fx_val, Fy_val)
+        goc_do = math.degrees(math.atan2(Fy_val, Fx_val)) % 360
+
         ket_qua[i + 1] = {
-            'Fx_txt': Fx_str,
-            'Fy_txt': Fy_str,
-            'Fx_val': Fx_so,
-            'Fy_val': Fy_so
+            'Fx_expr': sp.simplify(Fx_expr),
+            'Fy_expr': sp.simplify(Fy_expr),
+            'Fx_val': Fx_val,
+            'Fy_val': Fy_val,
+            'F_total': F_total,
+            'goc_do': goc_do
         }
         
     return ket_qua
 
 # ==========================================
-# NHẬP DỮ LIỆU TỪ NGƯỜI DÙNG
+# HÀM VẼ ĐỒ THỊ VECTƠ LỰC
 # ==========================================
-def nhap_du_lieu():
-    danh_sach = []
-    print("=== CHƯƠNG TRÌNH TÍNH LỰC TƯƠNG TÁC TĨNH ĐIỆN ===")
-    try:
-        n = int(input("Nhập số lượng điện tích trong hệ: "))
-        if n < 2:
-            print("Hệ thống cần ít nhất 2 điện tích để tính lực tương tác!")
-            return []
-            
-        for i in range(n):
-            print(f"\n--- Nhập thông tin cho điện tích q{i+1} ---")
-            q = float(input(f"  Nhập giá trị q{i+1} (Coulomb, ví dụ 2e-6 hoặc 0.000002): "))
-            x = float(input(f"  Nhập tọa độ x{i+1} (mét): "))
-            y = float(input(f"  Nhập tọa độ y{i+1} (mét): "))
-            danh_sach.append({'q': q, 'x': x, 'y': y})
-            
-    except ValueError:
-        print("Lỗi: Vui lòng nhập vào một số hợp lệ!")
-        return []
-        
-    return danh_sach
-
-# Chạy chương trình
-if __name__ == "__main__":
-    he_dien_tich = nhap_du_lieu()
+def ve_so_do_dien_tich(danh_sach, ket_qua):
+    plt.figure(figsize=(8, 8))
+    plt.axhline(0, color='gray', linestyle='--', linewidth=0.8)
+    plt.axvline(0, color='gray', linestyle='--', linewidth=0.8)
     
-    if he_dien_tich:
-        ket_qua_tinh = tinh_luc_he_dien_tich(he_dien_tich)
+    # Tìm lực tổng đại diện để chuẩn hóa chiều dài mũi tên vẽ
+    max_F = max([item['F_total'] for item in ket_qua.values()])
+    scale_length = 1.0  # Độ dài mũi tên trên đồ thị
+    
+    for i, dt in enumerate(danh_sach):
+        q, x, y = dt['q'], dt['x'], dt['y']
+        dt_id = i + 1
+        luc = ket_qua[dt_id]
+        
+        # 1. Vẽ vị trí điện tích (Dương: Đỏ, Âm: Xanh)
+        color = 'red' if q > 0 else 'blue'
+        symbol = '+' if q > 0 else '-'
+        plt.scatter(x, y, color=color, s=400, zorder=3, edgecolors='black')
+        plt.text(x, y, f"$q_{{{dt_id}}}$\n({symbol})", color='white', weight='bold', 
+                 fontsize=9, ha='center', va='center', zorder=4)
+        
+        # 2. Vẽ Vectơ Tổng lực F tác dụng lên điện tích
+        if luc['F_total'] > 0 and max_F > 0:
+            # Chuẩn hóa độ dài mũi tên để không bị quá dài/ngắn trên tọa độ
+            dx_vec = (luc['Fx_val'] / max_F) * scale_length
+            dy_vec = (luc['Fy_val'] / max_F) * scale_length
+            
+            plt.quiver(x, y, dx_vec, dy_vec, angles='xy', scale_units='xy', scale=1, 
+                       color='darkgreen', width=0.008, zorder=5)
+            
+            # Ghi chú thích tổng lực F cạnh mũi tên
+            plt.text(x + dx_vec * 1.15, y + dy_vec * 1.15, 
+                     f"$\vec{{F}}_{{{dt_id}}}$ = {luc['F_total']:.2e} N", 
+                     color='darkgreen', fontsize=10, weight='bold')
 
-        print("\n====== KẾT QUẢ TÍNH LỰC ĐIỆN TÁC DỤNG TỪNG ĐIỆN TÍCH ======\n")
-        for dien_tich_id, luc in ket_qua_tinh.items():
-            print(f"--- Điện tích q{dien_tich_id} ---")
-            print(f"+ Biểu thức Fx = {luc['Fx_txt']}")
-            print(f"+ Biểu thức Fy = {luc['Fy_txt']}")
-            print(f"=> Giá trị số: Fx = {luc['Fx_val']:.4f} N | Fy = {luc['Fy_val']:.4f} N\n")
+    plt.grid(True, linestyle=':', alpha=0.6)
+    plt.xlabel('Tọa độ X (m)')
+    plt.ylabel('Tọa độ Y (m)')
+    plt.title('SƠ ĐỒ HỆ ĐIỆN TÍCH VÀ VECTƠ TỔNG LỰC CÂN BẰNG', fontsize=12, weight='bold')
+    plt.axis('equal')  # Giữ tỉ lệ 1:1 cho trục X và Y
+    plt.show()
+
+# ==========================================
+# CHƯƠNG TRÌNH CHÍNH
+# ==========================================
+def nhap_du_lieu_mau():
+    # Dữ liệu mẫu (3 điện tích xếp thành tam giác) để test nhanh
+    return [
+        {'q': 2e-6,  'x': 0.0, 'y': 0.0},   # q1 dương ở gốc tọa độ
+        {'q': -4e-6, 'x': 3.0, 'y': 0.0},   # q2 âm ở (3, 0)
+        {'q': 3e-6,  'x': 1.5, 'y': 2.0}    # q3 dương ở (1.5, 2)
+    ]
+
+if __name__ == "__main__":
+    print("Đang chạy tính toán với dữ liệu hệ 3 điện tích mẫu...")
+    he_dien_tich = nhap_du_lieu_mau()
+    
+    ket_qua_tinh = tinh_luc_he_dien_tich(he_dien_tich)
+
+    # In thông số số liệu
+    for dt_id, luc in ket_qua_tinh.items():
+        print(f"q{dt_id}: Fx = {luc['Fx_val']:.4e} N | Fy = {luc['Fy_val']:.4e} N | F_tổng = {luc['F_total']:.4e} N")
+
+    # Gọi hàm vẽ hình
+    ve_so_do_dien_tich(he_dien_tich, ket_qua_tinh)
