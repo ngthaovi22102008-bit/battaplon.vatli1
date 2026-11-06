@@ -1,7 +1,6 @@
 import math
 import sympy as sp
 import matplotlib.pyplot as plt
-
 def tinh_luc_he_dien_tich(danh_sach_dien_tich):
     n = len(danh_sach_dien_tich)
     k_sym = sp.Symbol('k')
@@ -123,3 +122,42 @@ if __name__ == "__main__":
 
     # Gọi hàm vẽ hình
     ve_so_do_dien_tich(he_dien_tich, ket_qua_tinh)
+
+# ==========================================
+# NHẬP DỮ LIỆU TỪ NGƯỜI DÙNG
+# ==========================================
+def nhap_du_lieu():
+    danh_sach = []
+    print("=== CHƯƠNG TRÌNH TÍNH LỰC TƯƠNG TÁC TĨNH ĐIỆN ===")
+    try:
+        n = int(input("Nhập số lượng điện tích trong hệ: "))
+        if n < 2:
+            print("Hệ thống cần ít nhất 2 điện tích để tính lực tương tác!")
+            return []
+            
+        for i in range(n):
+            print(f"\n--- Nhập thông tin cho điện tích q{i+1} ---")
+            q = float(input(f"  Nhập giá trị q{i+1} (Coulomb, ví dụ 2e-6 hoặc 0.000002): "))
+            x = float(input(f"  Nhập tọa độ x{i+1} (mét): "))
+            y = float(input(f"  Nhập tọa độ y{i+1} (mét): "))
+            danh_sach.append({'q': q, 'x': x, 'y': y})
+            
+    except ValueError:
+        print("Lỗi: Vui lòng nhập vào một số hợp lệ!")
+        return []
+        
+    return danh_sach
+
+# Chạy chương trình
+if __name__ == "__main__":
+    he_dien_tich = nhap_du_lieu()
+    
+    if he_dien_tich:
+        ket_qua_tinh = tinh_luc_he_dien_tich(he_dien_tich)
+
+        print("\n====== KẾT QUẢ TÍNH LỰC ĐIỆN TÁC DỤNG TỪNG ĐIỆN TÍCH ======\n")
+        for dien_tich_id, luc in ket_qua_tinh.items():
+            print(f"--- Điện tích q{dien_tich_id} ---")
+            print(f"+ Biểu thức Fx = {luc['Fx_txt']}")
+            print(f"+ Biểu thức Fy = {luc['Fy_txt']}")
+            print(f"=> Giá trị số: Fx = {luc['Fx_val']:.4f} N | Fy = {luc['Fy_val']:.4f} N\n")
