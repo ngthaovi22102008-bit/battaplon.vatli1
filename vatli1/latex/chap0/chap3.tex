@@ -1,7 +1,7 @@
 \section{PHƯƠNG PHÁP NGHIÊN CỨU HOẶC THIẾT KẾ NGHIÊN CỨU}
 
 \subsection{Chọn phương pháp}
-Phương pháp thực hiện là mô phỏng số trên Python, kết hợp phép tính số thực (thư viện \texttt{math}), lập biểu thức ký hiệu (SymPy) và vẽ vectơ (Matplotlib). Đây là mô hình tính toán theo định luật Coulomb, không phải phép đo thực nghiệm trong phòng thí nghiệm.
+Lựa chọn phương pháp mô phỏng số kết hợp tính toán ký hiệu (Symbolic Computing) bằng ngôn ngữ Python (sử dụng thư viện SymPy, NumPy, Matplotlib) hoặc MATLAB.
 
 \subsection{Nhu cầu thông tin và Nguồn thông tin}
 \begin{itemize}[leftmargin=1.2cm]
@@ -10,38 +10,25 @@ Phương pháp thực hiện là mô phỏng số trên Python, kết hợp phé
 \end{itemize}
 
 \subsection{Thiết kế mẫu (Thiết kế bài toán \& dữ liệu)}
-Thiết kế mẫu dữ liệu kiểm thử gồm hệ 3 điện tích điểm đặt tại các đỉnh của một tam giác cân trong mặt phẳng $Oxy$:
+Thiết kế mẫu dữ liệu kiểm thử gồm hệ 3 điện tích điểm đặt tại các đỉnh của tam giác vuông trong mặt phẳng $Oxy$:
 \begin{itemize}[leftmargin=1.2cm]
     \item $q_1 = +2\ \mu\text{C}$ tại vị trí $(0;\, 0)\text{ m}$
-    \item $q_2 = -4\ \mu\text{C}$ tại vị trí $(3;\, 0)\text{ m}$
-    \item $q_3 = +3\ \mu\text{C}$ tại vị trí $(1{,}5;\, 2)\text{ m}$
+    \item $q_2 = -3\ \mu\text{C}$ tại vị trí $(0{,}3;\, 0)\text{ m}$
+    \item $q_3 = +4\ \mu\text{C}$ tại vị trí $(0;\, 0{,}4)\text{ m}$
 \end{itemize}
-Đây là cùng bộ dữ liệu mẫu được khai báo trong chương trình; các kiểm thử bổ sung bao gồm hai điện tích hút nhau, hai điện tích đẩy nhau, triệt tiêu đối xứng và điện tích trung hòa.
 
 \subsection{Phương pháp và công cụ thu thập thông tin}
-Mô hình giả sử các điện tích điểm đứng yên trong chân không, với $k=9\times10^9\ \text{N}\cdot\text{m}^2/\text{C}^2$; điện tích nhập bằng C và tọa độ bằng m. Các vị trí được giả định phân biệt nhau ($r_{ij}>0$), không xét ảnh hưởng của môi trường điện môi hay sự dịch chuyển điện tích. Vì vậy các kết quả là dự đoán số từ mô hình lý tưởng, không phải số liệu đo ngoài thực tế.
+Chương trình Python tự động nhận dữ liệu đầu vào qua bàn phím gồm số điện tích $n$, giá trị $q_i$ và tọa độ $(x_i,y_i)$. Chương trình tính các thành phần lực Coulomb do từng điện tích tác dụng, cộng vectơ lực để tìm lực tổng hợp, in kết quả và vẽ sơ đồ hệ điện tích.
 
-Chương trình nhận $n$, $q_i$ và $(x_i,y_i)$ qua bàn phím. Với từng điện tích đích $q_i$, vòng lặp xét mọi nguồn $q_j$ khác nó, tính $\Delta x=x_i-x_j$, $\Delta y=y_i-y_j$, $r^2=\Delta x^2+\Delta y^2$, rồi dùng
-\[
-\vec{F}_{j\to i}=k\,q_iq_j\frac{\Delta x\,\vec{i}+\Delta y\,\vec{j}}{(r^2)^{3/2}}.
-\]
-Chương trình cộng riêng các thành phần $F_x,F_y$, giữ các biểu thức theo hằng số ký hiệu $k$ bằng SymPy, sau đó tính độ lớn bằng \texttt{hypot} và hướng bằng \texttt{atan2}. Matplotlib vẽ các vị trí theo đúng tọa độ nhập vào; vectơ lực thành phần và hợp lực dùng cùng một hệ số thu phóng để hình dễ quan sát, nên độ dài mũi tên không biểu diễn trực tiếp số newton.
-
-Các trích đoạn dưới đây được chia theo chức năng và lấy từ mã nguồn \texttt{../vatli1.py}.
-
-\textbf{Phần 1 -- Khai báo hệ điện tích mẫu.} Mỗi phần tử lưu điện tích $q$ (C) và tọa độ $(x,y)$ (m); đây là bộ dữ liệu có thể chạy lại để đối chiếu kết quả trong báo cáo.
-\lstinputlisting[style=pythonstyle,firstline=358,lastline=366,caption={Khai báo ba điện tích mẫu},label={lst:vatli1-data}]{../vatli1.py}
-
-\textbf{Phần 2 -- Tính lực Coulomb do từng điện tích nguồn.} Với mỗi điện tích đang xét $q_i$, vòng lặp bỏ qua chính nó, xác định độ lệch tọa độ và khoảng cách, rồi tính các thành phần $F_x,F_y$ theo định luật Coulomb.
-\lstinputlisting[style=pythonstyle,firstline=23,lastline=52,caption={Tính các thành phần lực theo định luật Coulomb},label={lst:vatli1-components}]{../vatli1.py}
-
-\textbf{Phần 3 -- Chồng chất vectơ và lập kết quả.} Các thành phần từ mọi nguồn được cộng vào $F_{x,i}$ và $F_{y,i}$; chương trình dùng hai tổng này để tính độ lớn bằng \texttt{hypot}, đồng thời lưu biểu thức ký hiệu và lực thành phần để in hoặc vẽ.
-\lstinputlisting[style=pythonstyle,firstline=53,lastline=92,caption={Cộng lực và lưu kết quả cho từng điện tích},label={lst:vatli1-result}]{../vatli1.py}
-
-Để chạy kiểm tra từ thư mục \texttt{vatli1}, dùng lệnh \texttt{python tests/run\_cases.py}. Mỗi ca kiểm thử gồm cặp tệp cùng tên \texttt{.in}/\texttt{.out}: runner truyền nội dung \texttt{.in} vào stdin của bản sao chương trình CLI trong thư mục tạm, sau đó đối chiếu phần kết quả lực in ra với \texttt{.out}. Khi chạy chương trình bình thường, người dùng vẫn nhập dữ liệu tương tác qua bàn phím; bộ kiểm thử chỉ mô phỏng các lần nhập mẫu và không thay đổi luồng nhập liệu.
+Mã nguồn được trình bày dưới đây:
+\lstinputlisting[
+    style=pythonstyle,
+    caption={Mã nguồn chương trình tính lực tương tác tĩnh điện},
+    label={lst:vatli1}
+]{vatli1.py}
 
 \subsection{Phương pháp phân tích dữ liệu hoặc kiểm định giả thiết}
 \begin{itemize}[leftmargin=1.2cm]
-    \item Đối chiếu thành phần lực và độ lớn với các giá trị chuẩn tính độc lập theo định luật Coulomb; kiểm thử gồm 5 tình huống trong \texttt{tests/cases}.
-    \item Kiểm định định luật III Newton bằng cách tính tổng các thành phần $\sum_i F_{x,i}$ và $\sum_i F_{y,i}$ của toàn hệ.
+    \item Thay thế giá trị số vào biểu thức Symbolic (phép tính \texttt{subs}).
+    \item Kiểm định giả thiết định luật III Newton bằng cách tính tổng tổng cộng $\sum F_x$ và $\sum F_y$ của tất cả điện tích trong hệ.
 \end{itemize}
