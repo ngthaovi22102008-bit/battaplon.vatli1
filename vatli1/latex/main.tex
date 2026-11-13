@@ -1,0 +1,299 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{vietnam}
+\renewcommand{\contentsname}
+
+\usepackage{amsmath}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage[utf8]{inputenc}
+%\usepackage[francais]{babel}
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage[normalem]{ulem}
+\usepackage{tocloft}
+%\usepackage{soul}
+\usepackage{caption}
+\usepackage{float}
+\renewcommand{\figurename}{}
+\usepackage{wasysym}
+
+\usepackage{enumitem}
+\usepackage[makeroom]{cancel}
+\usepackage{amsthm}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}%Make diagonal lines in tables
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage[framemethod=tikz]{mdframed}
+% For highlighting paragraph backgrounds
+\usepackage{caption,subcaption}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}							
+% Standard graphics package
+\usepackage{array}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+\usepackage{fontsize}
+\usepackage{setspace}
+\usepackage{epsfig}
+\usepackage{indentfirst}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}
+  {}  % Để trống phần số
+  {0pt}
+  {}
+\setmainfont{Times New Roman}
+\usepackage{tikz}
+\usetikzlibrary{arrows,snakes,backgrounds}
+%\usepackage{pstcol} % PSTricks with the standard color package
+\usepackage[normalem]{ulem}
+\newtheorem{theorem}{{\bf Định lý}}
+\newtheorem{property}{{\bf Tính chất}}
+\newtheorem{proposition}{{\bf Mệnh đề}}
+\newtheorem{corollary}[proposition]{{\bf Hệ quả}}
+\newtheorem{lemma}[proposition]{{\bf Bổ đề}}
+\theoremstyle{definition}
+\newtheorem{exer}{Bài toán}
+\def\thesislayout
+{	% A4: 210 × 297
+	\geometry
+    {
+		a4paper,
+		total={160mm,240mm},  % fix over page
+		left=30mm,
+		top=30mm,
+	}
+}
+\renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+
+% Thêm dấu chấm nối cho Section
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Đặt độ sâu mục lục
+\setcounter{tocdepth}{3}
+%Tao hf
+\thesislayout
+%\usepackage{fancyhdr}
+\setlength{\headheight}{40pt}
+\pagestyle{fancy}
+\fancyhf{}%xoa thiet lap foot/head
+%_________%
+\fancyhead[L]{
+ \begin{tabular}{rl}
+    \begin{picture}(25,15)(0,0)
+    \put(0,-8){\includegraphics[width=8mm, height=8mm]{hcmut.png}}
+    %\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+   \end{picture}&
+	%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+	\begin{tabular}{l}
+		\textbf{\bf \ttfamily Trường Đại Học Bách Khoa - ĐHQG TP.HCM}\\
+        \textbf{\bf \ttfamily Khoa Khoa học ứng dụng}
+	\end{tabular} 	
+ \end{tabular}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+	\end{tabular}  }
+\fancyfoot[L]{\scriptsize \ttfamily Báo cáo bài tập lớn Vật Lí   - PH1003 \\ Niên khoá 2026 - 2027}
+\fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}/\pageref{LastPage}}
+  \fancyhead[R]{\thepage} % Hiển thị số trang góc phải (nếu muốn)
+  \renewcommand{\headrulewidth}{0.4pt} % Đường kẻ ngang
+}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+% Cấu hình lại kiểu trang plain để nó hiển thị y hệt như fancy (hiện logo ở trang đầu chương)
+\fancypagestyle{plain}  
+{
+    \fancyhf{} % Xóa sạch mặc định của plain
+      % Gắn lại header logo Bách Khoa vào đây
+      \fancyhead[L]{
+        \begin{tabular}{rl}
+          \begin{picture}(25,15)(0,0)
+          \put(0,-8){\includegraphics[width=8mm, height=8mm]{hcmut.png}}
+          \end{picture}&
+          \begin{tabular}{l}
+            \textbf{\bf \ttfamily Trường Đại Học Bách Khoa - ĐHQG TP.HCM}\\
+            \textbf{\bf \ttfamily Khoa Khoa học ứng dụng}
+          \end{tabular}     
+        \end{tabular}
+      }
+      }
+      \fancyhead[R]{\thepage} % Hiển thị số trang góc phải (nếu muốn)
+      \renewcommand{\headrulewidth}{0.4pt} % Đường kẻ ngang
+      \fancyfoot{} % clear all footer fields
+        \fancyfoot[L]{\scriptsize \ttfamily GIẢI TÍCH 1 – MT1003 | LỚP L02 | NHÓM AC \\ Niên khoá 2026 - 2027}
+      \fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}/\pageref{LastPage}}
+      \renewcommand{\headrulewidth}{0.3pt}
+      \renewcommand{\footrulewidth}{0.3pt}
+      
+}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\renewcommand{\thesection}{\arabic{section}}
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+% --- ĐOẠN CODE LÀM ĐẬM SECTION TRONG MỤC LỤC ---
+\makeatletter
+\let\oldl@section\l@section
+\renewcommand{\l@section}[2]{%
+  \oldl@section{\bfseries#1}{\bfseries#2}%
+}
+\makeatother
+
+\everymath{\color{black}}%make in-line maths symbols blue to read/check easily
+
+\sloppy
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+%space remove between caption, figure, and text
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+%space remove between caption, table, and text
+
+%\floatplacement{figure}{H}%forced here float placement automatically for figures
+%\floatplacement{table}{H}%forced here float placement automatically for table
+%the following settings (11 lines) are to remove white space before or after the figures and tables
+%\setcounter{topnumber}{2}
+%\setcounter{bottomnumber}{2}
+%\setcounter{totalnumber}{4}
+%\renewcommand{\topfraction}{0.85}
+%\renewcommand{\bottomfraction}{0.85}
+%\renewcommand{\textfraction}{0.15}
+%\renewcommand{\floatpagefraction}{0.8}
+%\renewcommand{\textfraction}{0.1}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+
+\thesislayout
+\lstset{
+language=C++,
+    aboveskip=6mm,
+    belowskip=-6mm,
+    backgroundcolor=\color{white},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=tb,
+    framesep=8pt,
+    rulecolor=\color{black},
+    title=\lstname,
+}
+
+\usepackage{listings}
+
+\usepackage{xcolor}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\newfontfamily\listingunicodefont{DejaVu Sans Mono}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta}\bfseries,
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=6pt,
+  showstringspaces=false,
+  tabsize=4,
+  frame=tb,
+  framesep=6pt,
+  rulecolor=\color{black},
+  literate=
+    {²}{{\listingunicodefont ²}}1 {³}{{\listingunicodefont ³}}1 {·}{{\listingunicodefont ·}}1 {À}{{\listingunicodefont À}}1
+    {Á}{{\listingunicodefont Á}}1 {Â}{{\listingunicodefont Â}}1 {Ì}{{\listingunicodefont Ì}}1 {Í}{{\listingunicodefont Í}}1
+    {Ô}{{\listingunicodefont Ô}}1 {Ù}{{\listingunicodefont Ù}}1 {à}{{\listingunicodefont à}}1 {á}{{\listingunicodefont á}}1
+    {â}{{\listingunicodefont â}}1 {ã}{{\listingunicodefont ã}}1 {é}{{\listingunicodefont é}}1 {ê}{{\listingunicodefont ê}}1
+    {ì}{{\listingunicodefont ì}}1 {í}{{\listingunicodefont í}}1 {ò}{{\listingunicodefont ò}}1 {ó}{{\listingunicodefont ó}}1
+    {ô}{{\listingunicodefont ô}}1 {ú}{{\listingunicodefont ú}}1 {Đ}{{\listingunicodefont Đ}}1 {đ}{{\listingunicodefont đ}}1
+    {Ĩ}{{\listingunicodefont Ĩ}}1 {ũ}{{\listingunicodefont ũ}}1 {Ơ}{{\listingunicodefont Ơ}}1 {ơ}{{\listingunicodefont ơ}}1
+    {Ư}{{\listingunicodefont Ư}}1 {ư}{{\listingunicodefont ư}}1 {ạ}{{\listingunicodefont ạ}}1 {Ả}{{\listingunicodefont Ả}}1
+    {ả}{{\listingunicodefont ả}}1 {ấ}{{\listingunicodefont ấ}}1 {ầ}{{\listingunicodefont ầ}}1 {ẫ}{{\listingunicodefont ẫ}}1
+    {Ậ}{{\listingunicodefont Ậ}}1 {ậ}{{\listingunicodefont ậ}}1 {ằ}{{\listingunicodefont ằ}}1 {ặ}{{\listingunicodefont ặ}}1
+    {Ẽ}{{\listingunicodefont Ẽ}}1 {ẽ}{{\listingunicodefont ẽ}}1 {Ế}{{\listingunicodefont Ế}}1 {ế}{{\listingunicodefont ế}}1
+    {ể}{{\listingunicodefont ể}}1 {Ệ}{{\listingunicodefont Ệ}}1 {ệ}{{\listingunicodefont ệ}}1 {Ị}{{\listingunicodefont Ị}}1
+    {ị}{{\listingunicodefont ị}}1 {ọ}{{\listingunicodefont ọ}}1 {ỏ}{{\listingunicodefont ỏ}}1 {ố}{{\listingunicodefont ố}}1
+    {Ồ}{{\listingunicodefont Ồ}}1 {ồ}{{\listingunicodefont ồ}}1 {Ổ}{{\listingunicodefont Ổ}}1 {ổ}{{\listingunicodefont ổ}}1
+    {ộ}{{\listingunicodefont ộ}}1 {ớ}{{\listingunicodefont ớ}}1 {Ờ}{{\listingunicodefont Ờ}}1 {ở}{{\listingunicodefont ở}}1
+    {Ợ}{{\listingunicodefont Ợ}}1 {ợ}{{\listingunicodefont ợ}}1 {Ụ}{{\listingunicodefont Ụ}}1 {ụ}{{\listingunicodefont ụ}}1
+    {Ứ}{{\listingunicodefont Ứ}}1 {ứ}{{\listingunicodefont ứ}}1 {Ừ}{{\listingunicodefont Ừ}}1 {ừ}{{\listingunicodefont ừ}}1
+    {Ữ}{{\listingunicodefont Ữ}}1 {ữ}{{\listingunicodefont ữ}}1 {Ự}{{\listingunicodefont Ự}}1 {ự}{{\listingunicodefont ự}}1
+    {₁}{{\listingunicodefont ₁}}1 {₂}{{\listingunicodefont ₂}}1 {→}{{\listingunicodefont →}}1 {√}{{\listingunicodefont √}}1
+    {≠}{{\listingunicodefont ≠}}1
+}
+
+\begin{document}
+\include{Bao_Cao_Vat_Ly_A1_Overleaf-1}
+\newpage
+\tableofcontents
+\include{chap0/chap1}
+\include{chap0/chap2}
+\include{chap0/chap3}
+\include{chap0/chap4}
+\include{chap0/chap5}
+\include{chap0/chap6}
+\end{document}

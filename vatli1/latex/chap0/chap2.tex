@@ -1,0 +1,43 @@
+\section{CƠ SỞ LÝ THUYẾT}
+
+\subsection{Nêu những khái niệm, vấn đề lý thuyết có liên quan}
+
+\subsubsection{Định luật Coulomb}
+Lực tương tác tĩnh điện giữa hai điện tích điểm $q_1$ và $q_2$ đặt trong chân không cách nhau khoảng $r_{12}$ có độ lớn tỉ lệ thuận với tích độ lớn các điện tích và tỉ lệ nghịch với bình phương khoảng cách giữa chúng:
+\[
+\vec{F}_{12} = k \frac{|q_1 q_2|}{r_{12}^2} \vec{e}_r
+\]
+Trong đó $k = \frac{1}{4\pi\varepsilon_0} \approx 9 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2$.
+
+\subsubsection{Nguyên lí chồng chất lực tĩnh điện}
+Lực tổng hợp tĩnh điện do $n$ điện tích điểm tác dụng lên một điện tích $q_0$ bằng tổng các vectơ lực do từng điện tích $q_i$ tác dụng riêng rẽ lên $q_0$.
+
+Biểu thức lực tổng hợp $\vec{F}_i$ tác dụng lên điện tích thứ $i$ và các thành phần theo hệ tọa độ $Oxy$. Trong đó khoảng cách giữa điện tích $q_i$ và $q_j$ được tính là:
+\[
+r_{ij} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}
+\]
+
+\subsection{Mô hình hóa hoặc hệ thống hóa vấn đề nghiên cứu}
+Mô hình hóa hệ $n$ điện tích điểm trong mặt phẳng $Oxy$:
+
+Xét điện tích $q_i$ tại vị trí $(x_i, y_i)$ và $q_j$ tại vị trí $(x_j, y_j)$. Vectơ khoảng cách $\vec{r}_{ij} = (x_j - x_i)\vec{i} + (y_j - y_i)\vec{j}$.
+
+Khoảng cách:
+\[
+r_{ij} = \sqrt{(x_j - x_i)^2 + (y_j - y_i)^2}
+\]
+
+Vectơ lực do $q_i$ tác dụng lên $q_j$ chiếu lên trục $Ox$ và $Oy$ có dạng biểu thức đại số:
+\begin{align*}
+F_{ij,x} &= k \cdot \frac{q_i q_j (x_j - x_i)}{\left[(x_j - x_i)^2 + (y_j - y_i)^2\right]^{3/2}} \\
+F_{ij,y} &= k \cdot \frac{q_i q_j (y_j - y_i)}{\left[(x_j - x_i)^2 + (y_j - y_i)^2\right]^{3/2}}
+\end{align*}
+
+\subsection{Xây dựng giả thiết}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Giả thiết 1:} Tương tác tĩnh điện tuân theo định luật III Newton, nghĩa là tổng lực tương tác tĩnh điện của toàn hệ kín phải bằng $0$: 
+    \[
+    \sum \vec{F}_j = \vec{0}
+    \]
+    \item \textbf{Giả thiết 2:} Phép toán hình thức (Symbolic) cho phép giữ nguyên dạng biểu thức chính xác tuyệt đối trước khi thế số, không gây ra lỗi tích lũy do làm tròn số lẻ.
+\end{itemize}

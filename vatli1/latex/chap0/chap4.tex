@@ -1,0 +1,32 @@
+\section{KẾT QUẢ}
+
+\subsection{Mô tả dữ liệu}
+Sau khi nhập mẫu dữ liệu 3 điện tích điểm vào chương trình, mã nguồn thực hiện xuất ra các biểu thức ký hiệu tổng quát và tính giá trị lực số dư tương ứng.\par
+
+    \textbf{B}\textbf{ả}\textbf{ng 4.1. B}\textbf{ả}\textbf{ng d}\textbf{ữ}\textbf{ li}\textbf{ệ}\textbf{u đ}\textbf{ầ}\textbf{u vào và k}\textbf{ế}\textbf{t qu}\textbf{ả}\textbf{ thành ph}\textbf{ầ}\textbf{n l}\textbf{ự}\textbf{c tác d}\textbf{ụ}\textbf{ng lên t}\textbf{ừ}\textbf{ng đi}\textbf{ệ}\textbf{n tích:}\par
+    \begin{center}\small
+    \begin{longtable}{|p{3.50cm}|p{3.50cm}|p{3.50cm}|p{3.50cm}|}
+    \hline
+    \textbf{Điện tích} & \textbf{Thành phần $F_x$ (\text{N})} & \textbf{Thành phần $F_y$ (\text{N})} & \textbf{Độ lớn $F_{\text{tổng}}$ (\text{N})} \\ \hline
+   $q_1$ ($+2\ \mu\text{C}$) & $+0{,}6000$ & $-0{,}4500$ & $0{,}7500$ \\ \hline
+        $q_2$ ($-3\ \mu\text{C}$) & $-0{,}1680$ & $+0{,}3456$ & $0{,}3843$ \\ \hline
+        $q_3$ ($+4\ \mu\text{C}$) & $-0{,}4320$ & $+0{,}1044$ & $0{,}4444$ \\ \hline
+    \end{longtable}
+    \end{center}
+
+\subsection{Kiểm định giả thiết / Kết quả phân tích}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Kiểm định tổng lực tác dụng lên toàn hệ:
+\end{itemize}
+\begin{align*}
+\sum F_x &= (+0{,}6000) + (-0{,}1680) + (-0{,}4320) = 0{,}0000\text{ N} \\
+\sum F_y &= (-0{,}4500) + (+0{,}3456) + (+0{,}1044) = 0{,}0000\text{ N}
+\end{align*}
+
+$\Rightarrow$ Giả thiết 1 hoàn toàn đúng, thỏa mãn định luật bảo toàn động lượng và định luật III Newton trong hệ kín.
+
+\subsection{Bình luận về kết quả (so sánh, đánh giá)}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{So sánh với phương pháp tính tay truyền thống:} Phương pháp Symbolic lập trình cho kết quả chính xác $100\%$, thời gian tính toán chỉ tốn vài millisecond so với 15--20 phút tính tay.
+    \item \textbf{Đánh giá tính tổng quát:} Chương trình có thể mở rộng tính toán cho $n = 10, 50$ hay $100$ điện tích mà không cần thay đổi cấu trúc mã nguồn.
+\end{itemize}

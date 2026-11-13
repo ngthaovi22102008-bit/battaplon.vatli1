@@ -1,0 +1,100 @@
+%Thut dong dau tien
+    \usepackage{indentfirst}
+%Bỏ số 0 của chapter va bla bla trước document%
+    \setcounter{secnumdepth}{4}
+    \setcounter{tocdepth}{3}
+    \makeatletter
+    \renewcommand{\thesection}{\arabic{section}}
+    \newcounter {subsubsubsection}[subsubsection]
+    \renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+    \newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+                                         {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                         {1.5ex \@plus .2ex}%
+                                         {\normalfont\normalsize\bfseries}}
+    \newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+    \newcommand*{\subsubsubsectionmark}[1]{}
+    \makeatother
+% --- ĐOẠN CODE LÀM ĐẬM SECTION TRONG MỤC LỤC ---
+    \makeatletter
+    \let\oldl@section\l@section
+    \renewcommand{\l@section}[2]{%
+      \oldl@section{\bfseries#1}{\bfseries#2}%
+    }
+    \makeatother
+%--Trang bia
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay,inner sep=0,outer sep=0]
+    % Vẽ viền cho trang tiêu đề
+    \draw[blue!70!black,line width=3pt] ([xshift=-1.5cm,yshift=-2cm]current page.north east) coordinate (A)--([xshift=1.5cm,yshift=-2cm]current page.north west) coordinate(B)--([xshift=1.5cm,yshift=2cm]current page.south west) coordinate (C)--([xshift=-1.5cm,yshift=2cm]current page.south east) coordinate(D)--cycle;
+
+    % Vẽ các đường chéo bên trong viền
+    \draw ([yshift=0.5cm,xshift=-0.5cm]A)-- ([yshift=0.5cm,xshift=0.5cm]B)--
+    ([yshift=-0.5cm,xshift=0.5cm]B) --([yshift=-0.5cm,xshift=-0.5cm]B)--([yshift=0.5cm,xshift=-0.5cm]C)--([yshift=0.5cm,xshift=0.5cm]C)--([yshift=-0.5cm,xshift=0.5cm]C)-- ([yshift=-0.5cm,xshift=-0.5cm]D)--([yshift=0.5cm,xshift=-0.5cm]D)--([yshift=0.5cm,xshift=0.5cm]D)--([yshift=-0.5cm,xshift=0.5cm]A)--([yshift=-0.5cm,xshift=-0.5cm]A)--([yshift=0.5cm,xshift=-0.5cm]A);
+    % Vẽ thêm các đường kẻ chéo nhỏ hơn bên trong các đường chéo lớn
+    \draw ([yshift=-0.3cm,xshift=0.3cm]A)-- ([yshift=-0.3cm,xshift=-0.3cm]B)--
+    ([yshift=0.3cm,xshift=-0.3cm]B) --([yshift=0.3cm,xshift=0.3cm]B)--([yshift=-0.3cm,xshift=0.3cm]C)--([yshift=-0.3cm,xshift=-0.3cm]C)--([yshift=0.3cm,xshift=-0.3cm]C)-- ([yshift=0.3cm,xshift=0.3cm]D)--([yshift=-0.3cm,xshift=0.3cm]D)--([yshift=-0.3cm,xshift=-0.3cm]D)--([yshift=0.3cm,xshift=-0.3cm]A)--([yshift=0.3cm,xshift=0.3cm]A)--([yshift=-0.3cm,xshift=0.3cm]A);
+\end{tikzpicture}
+
+\begin{center}
+\vspace{0.2cm}
+\textbf{\Large ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH} \\
+\textbf{\Large TRƯỜNG ĐẠI HỌC BÁCH KHOA} \\[0.2cm]
+\textbf{\Large KHOA KHOA HỌC ỨNG DỤNG}
+\vspace{0.cm}
+\end{center}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.3]{bia3.png}
+\end{center}
+\end{figure}
+
+\vspace{10pt}
+
+\begin{center}
+\hspace{1cm}
+    \textbf{{\LARGE BÁO CÁO BÀI TẬP LỚN GIẢI TÍCH 1}} \\
+\end{center}
+\vspace{0.5cm}
+\begin{center}
+{\bfseries
+    {\fontsize{17pt}{}\selectfont 
+  DỰ BÁO SỰ BÙNG NỔ SỐ LƯỢNG THIẾT BỊ KẾT NỐI IOT TRONG MỘT HỆ THỐNG SMART\par
+    }
+}
+\end{center}
+{\fontsize{16pt}{}\selectfont 
+    \begin{flushleft}
+        {\bfseries
+        GVHD: Nguyễn Văn Tú\\
+        Tên Lớp/Tên Nhóm: Lớp L02/Nhóm 10\\
+        \vspace{1cm}
+        }
+    \begin{center}
+    \textbf{Sinh viên thực hiện}\\
+    \vspace{0.5cm}
+        \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Họ tên} & \textbf{MSSV}\rule{0pt}{16pt}  \\ \hline
+        1 & 2610353\rule{0pt}{20pt} \\ \hline
+        2 & 2613005\rule{0pt}{20pt} \\ \hline
+        3 &2611431\rule{0pt}{20pt}\\ \hline
+        4 &2611431\rule{0pt}{20pt}\\ \hline
+        5 & 2613005\rule{0pt}{20pt} \\ \hline
+        \end{tabular}
+    \end{center}
+}
+
+\end{flushleft} 
+    }
+\vfill
+
+\begin{center}
+\vspace{1.3cm}
+    \centerline{\fontsize{17pt}{16pt}\selectfont\textit{TP. Hồ Chí Minh, tháng 5/2026}}
+\end{center}
+
+
+\newpage
+\vspace{10cm}
+\end{titlepage}

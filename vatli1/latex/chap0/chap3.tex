@@ -1,0 +1,34 @@
+\section{PHƯƠNG PHÁP NGHIÊN CỨU HOẶC THIẾT KẾ NGHIÊN CỨU}
+
+\subsection{Chọn phương pháp}
+Lựa chọn phương pháp mô phỏng số kết hợp tính toán ký hiệu (Symbolic Computing) bằng ngôn ngữ Python (sử dụng thư viện SymPy, NumPy, Matplotlib) hoặc MATLAB.
+
+\subsection{Nhu cầu thông tin và Nguồn thông tin}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Nhu cầu thông tin:} Công thức định luật Coulomb, thuật toán tính tổng đại số vectơ, tài liệu hướng dẫn thư viện SymPy/MATLAB.
+    \item \textbf{Nguồn thông tin:} Giáo trình Vật lý đại cương A1 (Bộ môn Vật lý Ứng dụng -- ĐH Bách Khoa TP.HCM), tài liệu \textit{MATLAB Projects for Scientists and Engineers} (A. L. Garcia).
+\end{itemize}
+
+\subsection{Thiết kế mẫu (Thiết kế bài toán \& dữ liệu)}
+Thiết kế mẫu dữ liệu kiểm thử gồm hệ 3 điện tích điểm đặt tại các đỉnh của tam giác vuông trong mặt phẳng $Oxy$:
+\begin{itemize}[leftmargin=1.2cm]
+    \item $q_1 = +2\ \mu\text{C}$ tại vị trí $(0;\, 0)\text{ m}$
+    \item $q_2 = -3\ \mu\text{C}$ tại vị trí $(0{,}3;\, 0)\text{ m}$
+    \item $q_3 = +4\ \mu\text{C}$ tại vị trí $(0;\, 0{,}4)\text{ m}$
+\end{itemize}
+
+\subsection{Phương pháp và công cụ thu thập thông tin}
+Chương trình Python tự động nhận dữ liệu đầu vào qua bàn phím gồm số điện tích $n$, giá trị $q_i$ và tọa độ $(x_i,y_i)$. Chương trình tính các thành phần lực Coulomb do từng điện tích tác dụng, cộng vectơ lực để tìm lực tổng hợp, in kết quả và vẽ sơ đồ hệ điện tích.
+
+Mã nguồn được trình bày dưới đây:
+\lstinputlisting[
+    style=pythonstyle,
+    caption={Mã nguồn chương trình tính lực tương tác tĩnh điện},
+    label={lst:vatli1}
+]{vatli1.py}
+
+\subsection{Phương pháp phân tích dữ liệu hoặc kiểm định giả thiết}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Thay thế giá trị số vào biểu thức Symbolic (phép tính \texttt{subs}).
+    \item Kiểm định giả thiết định luật III Newton bằng cách tính tổng tổng cộng $\sum F_x$ và $\sum F_y$ của tất cả điện tích trong hệ.
+\end{itemize}
