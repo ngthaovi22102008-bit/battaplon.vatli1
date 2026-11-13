@@ -3,38 +3,22 @@
 \subsection{Nêu những khái niệm, vấn đề lý thuyết có liên quan}
 
 \subsubsection{Định luật Coulomb}
-Trong chân không, lực giữa hai điện tích điểm tỉ lệ với tích đại số $q_iq_j$ và tỉ lệ nghịch với bình phương khoảng cách. Gọi $\vec{r}_{ji}$ là vectơ hướng từ điện tích nguồn $q_j$ đến điện tích đang xét $q_i$, có độ dài $r_{ij}$:
+Lực tương tác tĩnh điện giữa hai điện tích điểm $q_1$ và $q_2$ đặt trong chân không cách nhau khoảng $r_{12}$ có độ lớn tỉ lệ thuận với tích độ lớn các điện tích và tỉ lệ nghịch với bình phương khoảng cách giữa chúng:
 \[
-\vec{F}_{j\to i}
-= k\frac{q_iq_j}{r_{ij}^{3}}\vec{r}_{ji},
-\qquad
-|\vec{F}_{j\to i}|=k\frac{|q_iq_j|}{r_{ij}^{2}}.
+\vec{F}_{12} = k \frac{|q_1 q_2|}{r_{12}^2} \vec{e}_r
 \]
-Trong đó $k=\frac{1}{4\pi\varepsilon_0}\approx 9\times10^9\ \text{N}\cdot\text{m}^2/\text{C}^2$, $q_i,q_j$ đo bằng coulomb (C), khoảng cách đo bằng mét (m), và lực đo bằng newton (N). Dấu của tích $q_iq_j$ tự xác định chiều: cùng dấu đẩy nhau, trái dấu hút nhau.
+Trong đó $k = \frac{1}{4\pi\varepsilon_0} \approx 9 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2$.
 
 \subsubsection{Nguyên lí chồng chất lực tĩnh điện}
-Khi có nhiều điện tích nguồn, lực tổng hợp tác dụng lên $q_i$ là tổng vectơ các lực thành phần; phải cộng từng thành phần theo phương, không cộng riêng các độ lớn:
-\[
-\vec{F}_i=\sum_{\substack{j=1\\j\ne i}}^{n}\vec{F}_{j\to i}.
-\]
-Với hai lực thành phần, đây chính là quy tắc $\vec{F}=\vec{F}_1+\vec{F}_2$. Chẳng hạn, lực lên $q_1$ trong hệ ba điện tích là $\vec{F}_1=\vec{F}_{2\to1}+\vec{F}_{3\to1}$.
+Lực tổng hợp tĩnh điện do $n$ điện tích điểm tác dụng lên một điện tích $q_0$ bằng tổng các vectơ lực do từng điện tích $q_i$ tác dụng riêng rẽ lên $q_0$.
 
-Trong mặt phẳng $Oxy$, với $q_i$ tại $(x_i,y_i)$ và $q_j$ tại $(x_j,y_j)$:
+Biểu thức lực tổng hợp $\vec{F}_i$ tác dụng lên điện tích thứ $i$ và các thành phần theo hệ tọa độ $Oxy$. Trong đó khoảng cách giữa điện tích $q_i$ và $q_j$ được tính là:
 \[
 r_{ij} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}
 \]
-\begin{align*}
-F_{x,i}&=\sum_{j\ne i} k\frac{q_iq_j(x_i-x_j)}{r_{ij}^{3}},
-&
-F_{y,i}&=\sum_{j\ne i} k\frac{q_iq_j(y_i-y_j)}{r_{ij}^{3}},\\
-F_i&=\sqrt{F_{x,i}^{\,2}+F_{y,i}^{\,2}},
-&
-\theta_i&=\operatorname{atan2}(F_{y,i},F_{x,i}).
-\end{align*}
-Góc $\theta_i$ được đo từ trục $Ox$ dương; hàm $\operatorname{atan2}$ giữ đúng góc phần tư. Công thức thành phần và độ lớn lần lượt cho kết quả theo đơn vị N.
 
 \subsection{Mô hình hóa hoặc hệ thống hóa vấn đề nghiên cứu}
-Mô hình hóa hệ $n$ điện tích điểm trong mặt phẳng $Oxy$. Vectơ $\vec{r}_{ij}$ hướng từ $q_i$ đến $q_j$; vì vậy khi tính lực do $q_i$ tác dụng lên $q_j$, các thành phần dưới đây có cùng quy ước chiều:
+Mô hình hóa hệ $n$ điện tích điểm trong mặt phẳng $Oxy$:
 
 Xét điện tích $q_i$ tại vị trí $(x_i, y_i)$ và $q_j$ tại vị trí $(x_j, y_j)$. Vectơ khoảng cách $\vec{r}_{ij} = (x_j - x_i)\vec{i} + (y_j - y_i)\vec{j}$.
 
@@ -51,8 +35,9 @@ F_{ij,y} &= k \cdot \frac{q_i q_j (y_j - y_i)}{\left[(x_j - x_i)^2 + (y_j - y_i)
 
 \subsection{Xây dựng giả thiết}
 \begin{itemize}[leftmargin=1.2cm]
-    \item \textbf{Mô hình điện tích điểm:} Kích thước các vật mang điện không đáng kể so với khoảng cách giữa chúng, nên mỗi vật được mô hình hóa bằng điện tích điểm $q_i$ tại $(x_i,y_i,z_i)$ với $z_i=0$ trong mặt phẳng $Oxy$ mà chương trình khảo sát. Không có hai điện tích trùng vị trí; do đó $r_{ij}=\sqrt{(x_i-x_j)^2+(y_i-y_j)^2}\ne 0$ với mọi $i\ne j$.
-    \item \textbf{Trạng thái tĩnh điện:} Các điện tích đứng yên tại thời điểm khảo sát trong một hệ quy chiếu quán tính. Mô hình chỉ tính lực tĩnh điện Coulomb, bỏ qua hiệu ứng từ trường và bức xạ điện từ.
-    \item \textbf{Môi trường lý tưởng:} Hệ được xét trong chân không hoặc không khí với hằng số điện môi tương đối $\varepsilon_r\approx 1$, đồng nhất và đẳng hướng. Trong phép tính này, chương trình không đưa điện trường/từ trường ngoài hoặc trọng lực vào mô hình; điều đó không khẳng định các tác động ấy không tồn tại trong thực tế.
-    \item \textbf{Tính độc lập của tương tác:} Lực Coulomb giữa từng cặp điện tích tuân theo nguyên lý chồng chất. Lực của một cặp không bị che chắn hay biến dạng bởi các điện tích khác; lực tổng hợp được tính bằng cách cộng vectơ từng lực cặp.
+    \item \textbf{Giả thiết 1:} Tương tác tĩnh điện tuân theo định luật III Newton, nghĩa là tổng lực tương tác tĩnh điện của toàn hệ kín phải bằng $0$: 
+    \[
+    \sum \vec{F}_j = \vec{0}
+    \]
+    \item \textbf{Giả thiết 2:} Phép toán hình thức (Symbolic) cho phép giữ nguyên dạng biểu thức chính xác tuyệt đối trước khi thế số, không gây ra lỗi tích lũy do làm tròn số lẻ.
 \end{itemize}
